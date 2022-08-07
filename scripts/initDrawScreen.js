@@ -60,6 +60,7 @@ function initDrawScreen() {
   });
   canvas.addEventListener("mouseup", (ev) => penMachine.send("UP", ev));
   canvas.addEventListener("mousemove", (evt) => {
+    evt.preventDefault();
     const rect = evt.currentTarget.getBoundingClientRect();
     return penMachine.send("MOVE", {
       x: ((evt.clientX - rect.left) / (rect.right - rect.left)) * canvas.width,
@@ -69,6 +70,7 @@ function initDrawScreen() {
   canvas.addEventListener("mouseleave", (ev) => penMachine.send("EXIT", ev));
   canvas.addEventListener("touchstart", (ev) => penMachine.send("DOWN", ev));
   canvas.addEventListener("touchmove", (ev) => {
+    evt.preventDefault();
     const touch = ev.touches[0];
     const rect = ev.currentTarget.getBoundingClientRect();
     penMachine.send("MOVE", {
