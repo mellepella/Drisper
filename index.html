@@ -13,10 +13,15 @@
   <script src="./scripts/validateSettings.js"></script>
   <script src="./scripts/onLoad.js"></script>
   <script src="./scripts/initDrawScreen.js"></script>
+  <script src="./scripts/initWillGuessScreen.js"></script>
+  <script src="./scripts/initGuessScreen.js"></script>
+  <script src="./scripts/initResultsScreen.js"></script>
+  <script src="./scripts/dom.js"></script>
+  <script src="./scripts/canvas.js"></script>
 </head>
 
 <body>
-  <div id="start-screen" class="screen">
+  <div id="start-screen" class="screen current-screen">
     <h1>New Game</h1>
     <form onsubmit="onGameStart(event)" oninput="event.preventDefault(); validateSettings(event.currentTarget)">
       <label for="players-option">Number of players</label>
@@ -29,14 +34,15 @@
     </form>
   </div>
 
-  <div id="will-draw-screen" class="screen current-screen">
+  <div id="will-draw-screen" class="screen">
     <h1>Time to Draw</h1>
     <p>Pass phone to player to your left.</p>
     <button type="button" onclick="initDrawScreen()">Ready to Draw</button>
   </div>
 
   <div id="draw-screen" class="screen">
-    <h1>Draw</h1>
+    <h1 id="draw-heading">Draw</h1>
+    <p id="draw-time-left">🕙</p>
     <div class="color-palette">
       <input id="black" type="radio" value="black" name="color" checked />
       <label for="black" class="color"></label>
@@ -58,13 +64,13 @@
 
     </div>
     <canvas class="draw-canvas"></canvas>
-    <button type="button" onclick="Screen.displayScreen(screens.willGuess)">Done</button>
+    <button type="button" onclick="initWillGuessScreen()">Done</button>
   </div>
 
   <div id="will-guess-screen" class="screen">
     <h1>Time to Guess</h1>
     <p>Pass phone to player to your left.</p>
-    <button type="button" onclick="Screen.displayScreen(screens.guess)">Ready to Guess</button>
+    <button type="button" onclick="initGuessScreen()">Ready to Guess</button>
   </div>
 
   <div id="guess-screen" class="screen">
@@ -72,7 +78,7 @@
     <canvas></canvas>
     <label for="guess">Your Guess</label>
     <input type="text" name="guess" id="guess">
-    <button type="button" onclick="Screen.displayScreen(screens.result)">Done</button>
+    <button type="button" onclick="initResultsScreen()">Done</button>
   </div>
 
   <div id="result-screen" class="screen">

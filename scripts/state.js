@@ -7,7 +7,10 @@ const State = {
     this.numberOfPlayers = parseInt(formData.get("playersOption"));
     this.secondsPerRound = parseInt(formData.get("roundLengthOption"));
     this.word = formData.get("wordOption");
-
-    console.log(this);
+  },
+  rounds: [],
+  addRound(roundObject) {
+    this.rounds.push(roundObject);
+    return this.rounds;
   },
 };

@@ -13,44 +13,7 @@ function machine(initState, definition) {
   };
 }
 
-function initDrawScreen() {
-  Screen.displayScreen(screens.draw);
-  const screen = Screen.getScreen(screens.draw);
-  screen.querySelector(`input[name='color'][value='black']`).checked = true;
-  const canvas = screen.querySelector("canvas");
-  canvas.style.height = canvas.clientWidth + "px";
-  canvas.width = canvas.clientWidth;
-  canvas.height = canvas.clientHeight;
-  const ctx = canvas.getContext("2d");
-  const penSize = canvas.clientWidth / 100;
-  console.log(penSize);
-  const penMachine = machine("IDLE", {
-    DRAW: {
-      onTouch: ({ payload }) => {
-        ctx.beginPath();
-        ctx.fillStyle = document.querySelector(
-          'input[name="color"]:checked'
-        ).value;
-        ctx.arc(payload.x, payload.y, penSize, 0, 2 * Math.PI);
-        ctx.fill();
-      },
-      on: {
-        UP: "IDLE",
-        DOWN: "DRAW",
-        MOVE: "DRAW",
-        EXIT: "IDLE",
-      },
-    },
-    IDLE: {
-      on: {
-        UP: "IDLE",
-        DOWN: "DRAW",
-        MOVE: "IDLE",
-        EXIT: "IDLE",
-      },
-    },
-  });
-
+function registerListeners(canvas, penMachine) {
   canvas.addEventListener("mousedown", (evt) => {
     const rect = evt.currentTarget.getBoundingClientRect();
     return penMachine.send("DOWN", {
@@ -80,4 +43,65 @@ function initDrawScreen() {
     });
   });
   canvas.addEventListener("touchend", (ev) => penMachine.send("UP", ev));
+}
+
+function getPenMachine(ctx, penSize) {
+  return machine("IDLE", {
+    DRAW: {
+      onTouch: ({ payload }) => {
+        ctx.beginPath();
+        ctx.fillStyle = document.querySelector(
+          'input[name="color"]:checked'
+        ).value;
+        ctx.arc(payload.x, payload.y, penSize, 0, 2 * Math.PI);
+        ctx.fill();
+      },
+      on: {
+        UP: "IDLE",
+        DOWN: "DRAW",
+        MOVE: "DRAW",
+        EXIT: "IDLE",
+        TIMES_UP: "DISABLED",
+      },
+    },
+    DISABLED: {},
+    IDLE: {
+      on: {
+        UP: "IDLE",
+        DOWN: "DRAW",
+        MOVE: "IDLE",
+        EXIT: "IDLE",
+        TIMES_UP: "DISABLED",
+      },
+    },
+  });
+}
+
+function initDrawScreen() {
+  const startedAt = new Date();
+  setText("#draw-heading", `Draw "${State.word}"`);
+  Screen.displayScreen(screens.draw);
+  const screen = Screen.getScreen(screens.draw);
+  screen.querySelector(`input[name='color'][value='black']`).checked = true;
+  const canvas = screen.querySelector("canvas");
+  canvas.style.height = canvas.clientWidth + "px";
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+  const ctx = canvas.getContext("2d");
+  const penSize = canvas.clientWidth / 100;
+  const penMachine = getPenMachine(ctx, penSize);
+  registerListeners(canvas, penMachine);
+
+  setInterval(() => {
+    const elapsedMs = new Date().getTime() - startedAt.getTime();
+    const elapsedS = Math.round(elapsedMs / 1000);
+    const secondsLeft = Math.max(State.secondsPerRound - elapsedS, 0);
+
+    if (secondsLeft > 0) {
+      setText("#draw-time-left", `🕙 ${secondsLeft}s`);
+    } else {
+      setText("#draw-time-left", `🕙 Times up!`);
+      penMachine.send("TIMES_UP");
+    }
+  }, 250);
 }
