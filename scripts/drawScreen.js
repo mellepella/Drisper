@@ -124,3 +124,17 @@ function initDrawScreen() {
     }
   }, 250);
 }
+
+function onSubmitDrawing() {
+  const screen = Screen.getScreen(screens.draw);
+  const canvas = screen.querySelector("canvas");
+  State.addRound({ type: "draw", canvas: cloneCanvas(canvas) });
+  detach();
+
+  const currentRound = State.rounds.length;
+  if (currentRound >= State.numberOfPlayers) {
+    initResultsScreen();
+  } else {
+    initWillGuessScreen();
+  }
+}
