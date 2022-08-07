@@ -1,13 +1,7 @@
 function initResultsScreen() {
   detach();
   Screen.displayScreen(screens.result);
-  const guessScreen = Screen.getScreen(screens.guess);
   const resultScreen = Screen.getScreen(screens.result);
-  const input = guessScreen.querySelector("input");
-  State.addRound({
-    type: "guess",
-    guess: input.value,
-  });
 
   const results = resultScreen.querySelector("#results");
   results.innerHTML = "";

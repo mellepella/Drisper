@@ -19,6 +19,7 @@
   <script src="./scripts/startScreen.js"></script>
   <script src="./scripts/dom.js"></script>
   <script src="./scripts/canvas.js"></script>
+  <script src="./scripts/willDrawScreen.js"></script>
 </head>
 
 <body>
@@ -79,7 +80,7 @@
     <canvas></canvas>
     <label for="guess">Your Guess</label>
     <input type="text" name="guess" id="guess">
-    <button type="button" onclick="initResultsScreen()">Done</button>
+    <button type="button" onclick="onGuess()">Done</button>
   </div>
 
   <div id="result-screen" class="screen">

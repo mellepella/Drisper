@@ -23,3 +23,19 @@ function initGuessScreen() {
     button.disabled = ev.target.value < 1;
   });
 }
+
+function onGuess() {
+  const guessScreen = Screen.getScreen(screens.guess);
+  const input = guessScreen.querySelector("input");
+  State.addRound({
+    type: "guess",
+    guess: input.value,
+  });
+
+  const currentRound = State.rounds.length;
+  if (currentRound >= State.numberOfPlayers) {
+    initResultsScreen();
+  } else {
+    initWillDrawScreen();
+  }
+}

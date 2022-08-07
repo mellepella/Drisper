@@ -79,7 +79,10 @@ function getPenMachine(ctx, penSize) {
 
 function initDrawScreen() {
   const startedAt = new Date();
-  setText("#draw-heading", `Draw "${State.word}"`);
+  const lastGuess = State.rounds
+    .filter((r) => r.type === "guess")
+    .find(() => true)?.guess;
+  setText("#draw-heading", `Draw "${lastGuess ?? State.word}"`);
   Screen.displayScreen(screens.draw);
   const screen = Screen.getScreen(screens.draw);
   screen.querySelector(`input[name='color'][value='black']`).checked = true;
