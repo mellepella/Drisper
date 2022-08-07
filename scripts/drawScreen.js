@@ -96,10 +96,8 @@ function getPenMachine(ctx, penSize) {
 
 function initDrawScreen() {
   const startedAt = new Date();
-  const lastGuess = State.rounds
-    .filter((r) => r.type === "guess")
-    .reverse()
-    .find(() => true)?.guess;
+  const guesses = State.rounds.filter((r) => r.type === "guess");
+  const lastGuess = guesses[guesses.length - 1]?.guess;
   setText("#draw-heading", `Draw "${lastGuess ?? State.word}"`);
   Screen.displayScreen(screens.draw);
   const screen = Screen.getScreen(screens.draw);
