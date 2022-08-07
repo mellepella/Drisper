@@ -8,6 +8,7 @@ const Screen = {
     });
     const nextScreen = Screen.getScreen(id);
     nextScreen.classList.add("current-screen");
+    window.scrollTo(0, 0);
   },
 };
 
