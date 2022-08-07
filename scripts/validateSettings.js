@@ -5,5 +5,5 @@ function validateSettings(form) {
   const word = formData.get("wordOption");
 
   const isValid = numberOfPlayers >= 3 && secondsPerRound >= 10 && word;
-  form.querySelector("input[type='submit']").disabled = !isValid;
+  form.querySelector("button").disabled = !isValid;
 }
