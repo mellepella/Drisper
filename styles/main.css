@@ -1,0 +1,99 @@
+:root {
+  --cyan-600: #0891B2;
+  --cyan-800: #155E75;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+  --border-color: rgba(1,1,1,0.2);
+}
+
+* > * {
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+  background: var(--slate-700);
+  font-family: verdana;
+}
+
+.screen {
+  display: none;
+  max-width: 40rem;
+  width: 100%;
+  height: 100vh;
+}
+
+.current-screen {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100vh;
+}
+
+canvas {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  width: 100%;
+  background: white;
+  margin-bottom: 1rem;
+}
+
+input, button {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+}
+
+input[type='text'], input[type='number'] {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border-color);
+}
+
+button, input[type='submit'] {
+  background: var(--cyan-600);
+  border: 2px solid var(--border-color);
+  color: white;
+  width: 100%;
+  display: block;
+
+}
+
+button:disabled, input[type='submit']:disabled {
+  opacity: 0.5;
+}
+
+.color-palette {
+  display: flex;
+  flex-direction: row;
+}
+
+.color {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+}
+
+input[name="color"]:checked + label {
+  border: 4px solid var(--cyan-600);
+}
+
+input[name="color"] {
+  display: none;
+}
+
+#black + label { background: black; }
+#white + label { background: white; }
+#blue + label { background: blue; }
+#red + label { background: red; }
+#yellow + label { background: yellow; }
+#green + label { background: green; }
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}

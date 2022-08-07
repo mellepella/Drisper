@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drisper - The official website</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <script src="../scripts/onGameStart.js"></script>
+  <script src="../scripts/screen.js"></script>
+  <script src="../scripts/state.js"></script>
+  <script src="../scripts/validateSettings.js"></script>
+  <script src="../scripts/onLoad.js"></script>
+  <script src="../scripts/initDrawScreen.js"></script>
+</head>
+
+<body>
+  <div id="start-screen" class="screen">
+    <h1>New Game</h1>
+    <form onsubmit="onGameStart(event)" oninput="event.preventDefault(); validateSettings(event.currentTarget)">
+      <label for="players-option">Number of players</label>
+      <input name="playersOption" id="players-option" type="number" value="5">
+      <label for="round-length-option">Seconds per round</label>
+      <input name="roundLengthOption" id="round-length-option" type="number" value="60">
+      <label for="word-option">Word</label>
+      <input name="wordOption" id="word-option" type="text" value="cucumber">
+      <input type="submit" value="Start game" disabled>
+    </form>
+  </div>
+
+  <div id="will-draw-screen" class="screen current-screen">
+    <h1>Time to Draw</h1>
+    <p>Pass phone to player to your left.</p>
+    <button type="button" onclick="initDrawScreen()">Ready to Draw</button>
+  </div>
+
+  <div id="draw-screen" class="screen">
+    <h1>Draw</h1>
+    <div class="color-palette">
+      <input id="black" type="radio" value="black" name="color" checked />
+      <label for="black" class="color"></label>
+
+      <input id="white" type="radio" value="white" name="color" />
+      <label for="white" class="color"></label>
+
+      <input id="blue" type="radio" value="blue" name="color" />
+      <label for="blue" class="color"></label>
+
+      <input id="red" type="radio" value="red" name="color" />
+      <label for="red" class="color"></label>
+
+      <input id="green" type="radio" value="green" name="color" />
+      <label for="green" class="color"></label>
+
+      <input id="yellow" type="radio" value="yellow" name="color" />
+      <label for="yellow" class="color"></label>
+
+    </div>
+    <canvas class="draw-canvas"></canvas>
+    <button type="button" onclick="Screen.displayScreen(screens.willGuess)">Done</button>
+  </div>
+
+  <div id="will-guess-screen" class="screen">
+    <h1>Time to Guess</h1>
+    <p>Pass phone to player to your left.</p>
+    <button type="button" onclick="Screen.displayScreen(screens.guess)">Ready to Guess</button>
+  </div>
+
+  <div id="guess-screen" class="screen">
+    <h1>Guess</h1>
+    <canvas></canvas>
+    <label for="guess">Your Guess</label>
+    <input type="text" name="guess" id="guess">
+    <button type="button" onclick="Screen.displayScreen(screens.result)">Done</button>
+  </div>
+
+  <div id="result-screen" class="screen">
+    <h1>Results</h1>
+  </div>
+  <script>onLoad();</script>
+</body>
+
+</html>
