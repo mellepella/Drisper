@@ -1,6 +1,8 @@
 function initGuessScreen() {
   Screen.displayScreen(screens.guess);
   const screen = Screen.getScreen(screens.guess);
+  const input = screen.querySelector("input");
+  input.value = "";
   const canvas = screen.querySelector("canvas");
   const lastRound = State.rounds[State.rounds.length - 1];
 
@@ -15,10 +17,9 @@ function initGuessScreen() {
   const ctx = canvas.getContext("2d");
   ctx.drawImage(lastCanvas, 0, 0);
 
-  const input = screen.querySelector("input");
   const button = screen.querySelector("button");
   button.disabled = input.value < 1;
-  input.addEventListener("input", (ev) => {
+  listener(input, "input", (ev) => {
     button.disabled = ev.target.value < 1;
   });
 }

@@ -14,24 +14,24 @@ function machine(initState, definition) {
 }
 
 function registerListeners(canvas, penMachine) {
-  canvas.addEventListener("mousedown", (evt) => {
+  listener(canvas, "mousedown", (evt) => {
     const rect = evt.currentTarget.getBoundingClientRect();
     return penMachine.send("DOWN", {
       x: ((evt.clientX - rect.left) / (rect.right - rect.left)) * canvas.width,
       y: ((evt.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height,
     });
   });
-  canvas.addEventListener("mouseup", (ev) => penMachine.send("UP", ev));
-  canvas.addEventListener("mousemove", (evt) => {
+  listener(canvas, "mouseup", (ev) => penMachine.send("UP", ev));
+  listener(canvas, "mousemove", (evt) => {
     const rect = evt.currentTarget.getBoundingClientRect();
     return penMachine.send("MOVE", {
       x: ((evt.clientX - rect.left) / (rect.right - rect.left)) * canvas.width,
       y: ((evt.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height,
     });
   });
-  canvas.addEventListener("mouseleave", (ev) => penMachine.send("EXIT", ev));
-  canvas.addEventListener("touchstart", (ev) => penMachine.send("DOWN", ev));
-  canvas.addEventListener("touchmove", (ev) => {
+  listener(canvas, "mouseleave", (ev) => penMachine.send("EXIT", ev));
+  listener(canvas, "touchstart", (ev) => penMachine.send("DOWN", ev));
+  listener(canvas, "touchmove", (ev) => {
     ev.preventDefault();
     const touch = ev.touches[0];
     const rect = ev.currentTarget.getBoundingClientRect();
@@ -42,7 +42,7 @@ function registerListeners(canvas, penMachine) {
         ((touch.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height,
     });
   });
-  canvas.addEventListener("touchend", (ev) => penMachine.send("UP", ev));
+  listener(canvas, "touchend", (ev) => penMachine.send("UP", ev));
 }
 
 function getPenMachine(ctx, penSize) {
@@ -92,7 +92,7 @@ function initDrawScreen() {
   const penMachine = getPenMachine(ctx, penSize);
   registerListeners(canvas, penMachine);
 
-  setInterval(() => {
+  interval(() => {
     const elapsedMs = new Date().getTime() - startedAt.getTime();
     const elapsedS = Math.round(elapsedMs / 1000);
     const secondsLeft = Math.max(State.secondsPerRound - elapsedS, 0);

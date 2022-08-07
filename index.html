@@ -12,10 +12,11 @@
   <script src="./scripts/state.js"></script>
   <script src="./scripts/validateSettings.js"></script>
   <script src="./scripts/onLoad.js"></script>
-  <script src="./scripts/initDrawScreen.js"></script>
-  <script src="./scripts/initWillGuessScreen.js"></script>
-  <script src="./scripts/initGuessScreen.js"></script>
-  <script src="./scripts/initResultsScreen.js"></script>
+  <script src="./scripts/drawScreen.js"></script>
+  <script src="./scripts/willGuessScreen.js"></script>
+  <script src="./scripts/guessScreen.js"></script>
+  <script src="./scripts/resultsScreen.js"></script>
+  <script src="./scripts/startScreen.js"></script>
   <script src="./scripts/dom.js"></script>
   <script src="./scripts/canvas.js"></script>
 </head>
@@ -83,6 +84,8 @@
 
   <div id="result-screen" class="screen">
     <h1>Results</h1>
+    <div id="results"></div>
+    <button type="button" onclick="initStartScreen()">Play Again</button>
   </div>
   <script>onLoad();</script>
 </body>
