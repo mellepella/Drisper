@@ -3,6 +3,11 @@ function machine(initState, definition) {
     state: initState,
     send(event, payload) {
       const nextState = definition?.[this.state]?.on?.[event];
+      const didChange = nextState && nextState !== this.state;
+
+      if (didChange) {
+        definition?.[this.state]?.onExit?.({ event, payload });
+      }
 
       if (nextState) {
         this.state = nextState;
@@ -46,15 +51,27 @@ function registerListeners(canvas, penMachine) {
 }
 
 function getPenMachine(ctx, penSize) {
+  let lastPosition;
+
   return machine("IDLE", {
     DRAW: {
+      onExit: () => {
+        lastPosition = undefined;
+      },
       onTouch: ({ payload }) => {
+        const startPosition = lastPosition ?? payload;
+        const endPosition = payload;
+
         ctx.beginPath();
-        ctx.fillStyle = document.querySelector(
+        ctx.lineCap = "round";
+        ctx.lineWidth = penSize;
+        ctx.strokeStyle = document.querySelector(
           'input[name="color"]:checked'
         ).value;
-        ctx.arc(payload.x, payload.y, penSize, 0, 2 * Math.PI);
-        ctx.fill();
+        ctx.moveTo(startPosition.x, startPosition.y);
+        ctx.lineTo(endPosition.x, endPosition.y);
+        ctx.stroke();
+        lastPosition = payload;
       },
       on: {
         UP: "IDLE",
