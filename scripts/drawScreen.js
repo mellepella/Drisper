@@ -98,6 +98,7 @@ function initDrawScreen() {
   const startedAt = new Date();
   const lastGuess = State.rounds
     .filter((r) => r.type === "guess")
+    .reverse()
     .find(() => true)?.guess;
   setText("#draw-heading", `Draw "${lastGuess ?? State.word}"`);
   Screen.displayScreen(screens.draw);
