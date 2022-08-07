@@ -107,6 +107,7 @@ function initDrawScreen() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
   const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   const penSize = canvas.clientWidth / 100;
   const penMachine = getPenMachine(ctx, penSize);
   registerListeners(canvas, penMachine);
