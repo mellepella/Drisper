@@ -11,10 +11,12 @@ function initResultsScreen() {
 
   State.rounds.forEach((round) => {
     if (round.type === "draw") {
+      const div = document.createElement("div");
       const descP = document.createElement("p");
       descP.innerText = "Drew";
-      results.appendChild(descP);
-      results.appendChild(cloneCanvas(round.canvas));
+      div.appendChild(descP);
+      div.appendChild(cloneCanvas(round.canvas));
+      results.appendChild(div);
       return;
     }
 

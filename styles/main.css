@@ -1,6 +1,9 @@
 :root {
   --cyan-600: #0891B2;
   --cyan-800: #155E75;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
   --slate-700: #334155;
   --slate-800: #1E293B;
   --slate-900: #0F172A;
@@ -25,6 +28,7 @@ body {
   top: 0;
   left: 0;
   transform: translateX(100%);
+  padding: 0.5rem;
 }
 
 .screen:not(.next-screen) {
@@ -114,4 +118,11 @@ input[name="color"] {
 label {
   display: block;
   margin-bottom: 0.25rem;
+}
+
+#results > * {
+  margin-bottom: 2rem;
+  background: var(--slate-600);
+  padding: 1rem;
+  border-radius: 3px;
 }
