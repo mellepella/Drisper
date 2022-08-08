@@ -10,15 +10,18 @@ const Screen = {
       return;
     }
 
+    window.scrollTo(0, 0);
     nextScreen.classList.add("next-screen");
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        nextScreen.classList.remove("next-screen");
-        nextScreen.classList.add("current-screen");
-        previousScreen.classList.remove("current-screen");
-      });
+      nextScreen.classList.remove("next-screen");
+      nextScreen.classList.add("current-screen");
+      previousScreen.classList.remove("current-screen");
+      previousScreen.classList.add("previous-screen");
+
+      setTimeout(() => {
+        previousScreen.classList.remove("previous-screen");
+      }, 200);
     });
-    window.scrollTo(0, 0);
   },
 };
 
