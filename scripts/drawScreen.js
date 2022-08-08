@@ -73,7 +73,8 @@ function getPenMachine(ctx, penSize) {
         EXIT: "IDLE",
       },
       onTouch: () => {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         const sequenceStart = Math.max(sequenceStarts.pop(), 0);
         moves = moves.slice(0, sequenceStart);
         moves.forEach((move) => {
