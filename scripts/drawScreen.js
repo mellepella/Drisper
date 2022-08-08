@@ -73,10 +73,10 @@ function getPenMachine(ctx, penSize) {
         EXIT: "IDLE",
       },
       onTouch: () => {
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         const sequenceStart = Math.max(sequenceStarts.pop(), 0);
         moves = moves.slice(0, sequenceStart);
+        clearContext(ctx);
+
         moves.forEach((move) => {
           const { startPosition, endPosition } = move;
           ctx.beginPath();
@@ -161,7 +161,7 @@ function initDrawScreen() {
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const penSize = canvas.clientWidth / 100;
-  penMachine = getPenMachine(ctx, penSize);
+  const penMachine = getPenMachine(ctx, penSize);
   registerListeners(canvas, penMachine);
 
   interval(() => {

@@ -20,3 +20,15 @@ function detach() {
   detachers.forEach((d) => d());
   detachers = [];
 }
+
+function clearContext(ctx) {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+  // On chrome android the canvas won't clear
+  // unless also performing a stroke operation.
+  ctx.beginPath();
+  ctx.strokeStyle = "white";
+  ctx.moveTo(0, 0);
+  ctx.lineTo(0, 0);
+  ctx.stroke();
+}
