@@ -29,6 +29,7 @@ function mouseEventToCoord(evt) {
 }
 
 function touchEventToCoord(ev) {
+  const canvas = ev.currentTarget;
   const touch = ev.touches[0];
   const rect = ev.currentTarget.getBoundingClientRect();
   return {
@@ -57,9 +58,7 @@ function registerListeners(canvas, penMachine) {
     ev.preventDefault();
     penMachine.send("MOVE", touchEventToCoord(ev));
   });
-  listener(canvas, "touchend", (ev) =>
-    penMachine.send("UP", touchEventToCoord(ev))
-  );
+  listener(canvas, "touchend", (ev) => penMachine.send("UP"));
 }
 
 function getPenMachine(ctx, penSize) {
