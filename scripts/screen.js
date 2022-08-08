@@ -3,11 +3,21 @@ const Screen = {
     return document.querySelector(`#${id}`);
   },
   displayScreen: (id) => {
-    document.querySelectorAll(".current-screen").forEach((el) => {
-      el.classList.remove("current-screen");
-    });
+    const previousScreen = document.querySelector(".current-screen");
     const nextScreen = Screen.getScreen(id);
-    nextScreen.classList.add("current-screen");
+
+    if (previousScreen === nextScreen) {
+      return;
+    }
+
+    nextScreen.classList.add("next-screen");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        nextScreen.classList.remove("next-screen");
+        nextScreen.classList.add("current-screen");
+        previousScreen.classList.remove("current-screen");
+      });
+    });
     window.scrollTo(0, 0);
   },
 };

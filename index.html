@@ -25,83 +25,95 @@
 
 <body>
   <div id="start-screen" class="screen current-screen">
-    <h1>New Game</h1>
-    <form onsubmit="onGameStart(event)" oninput="event.preventDefault(); validateSettings(event.currentTarget)">
-      <label for="players-option">Number of players</label>
-      <input name="playersOption" id="players-option" type="number" value="5">
-      <label for="round-length-option">Seconds per round</label>
-      <input name="roundLengthOption" id="round-length-option" type="number" value="60">
-      <label for="word-option">Word</label>
-      <input name="wordOption" id="word-option" type="text" value="cucumber">
-      <button type="submit" disabled>Start Game</button>
-    </form>
+    <div class="container">
+      <h1>New Game</h1>
+      <form onsubmit="onGameStart(event)" oninput="event.preventDefault(); validateSettings(event.currentTarget)">
+        <label for="players-option">Number of players</label>
+        <input name="playersOption" id="players-option" type="number" value="5">
+        <label for="round-length-option">Seconds per round</label>
+        <input name="roundLengthOption" id="round-length-option" type="number" value="60">
+        <label for="word-option">Word</label>
+        <input name="wordOption" id="word-option" type="text" value="cucumber">
+        <button type="submit" disabled>Start Game</button>
+      </form>
+    </div>
   </div>
 
   <div id="will-draw-screen" class="screen">
-    <h1>Time to Draw</h1>
-    <p>Pass phone to player to your left.</p>
-    <button type="button" onclick="initDrawScreen()">Ready to Draw</button>
+    <div class="container">
+      <h1>Time to Draw</h1>
+      <p>Pass phone to player to your left.</p>
+      <button type="button" onclick="initDrawScreen()">Ready to Draw</button>
+    </div>
   </div>
 
   <div id="draw-screen" class="screen">
-    <h1 id="draw-heading">Draw</h1>
-    <p id="draw-time-left">🕙</p>
-    <div class="color-palette">
+    <div class="container">
+      <h1 id="draw-heading">Draw</h1>
+      <p id="draw-time-left">🕙</p>
+      <div class="color-palette">
 
-      <input id="white" type="radio" value="white" name="color" />
-      <label for="white" class="color"></label>
+        <input id="white" type="radio" value="white" name="color" />
+        <label for="white" class="color"></label>
 
-      <input id="pink" type="radio" value="pink" name="color" />
-      <label for="pink" class="color"></label>
+        <input id="pink" type="radio" value="pink" name="color" />
+        <label for="pink" class="color"></label>
 
-      <input id="red" type="radio" value="red" name="color" />
-      <label for="red" class="color"></label>
+        <input id="red" type="radio" value="red" name="color" />
+        <label for="red" class="color"></label>
 
-      <input id="purple" type="radio" value="purple" name="color" />
-      <label for="purple" class="color"></label>
+        <input id="purple" type="radio" value="purple" name="color" />
+        <label for="purple" class="color"></label>
 
-      <input id="blue" type="radio" value="blue" name="color" />
-      <label for="blue" class="color"></label>
+        <input id="blue" type="radio" value="blue" name="color" />
+        <label for="blue" class="color"></label>
 
-      <input id="green" type="radio" value="green" name="color" />
-      <label for="green" class="color"></label>
+        <input id="green" type="radio" value="green" name="color" />
+        <label for="green" class="color"></label>
 
-      <input id="yellow" type="radio" value="yellow" name="color" />
-      <label for="yellow" class="color"></label>
+        <input id="yellow" type="radio" value="yellow" name="color" />
+        <label for="yellow" class="color"></label>
 
-      <input id="orange" type="radio" value="orange" name="color" />
-      <label for="orange" class="color"></label>
+        <input id="orange" type="radio" value="orange" name="color" />
+        <label for="orange" class="color"></label>
 
-      <input id="brown" type="radio" value="brown" name="color" />
-      <label for="brown" class="color"></label>
+        <input id="brown" type="radio" value="brown" name="color" />
+        <label for="brown" class="color"></label>
 
-      <input id="black" type="radio" value="black" name="color" checked />
-      <label for="black" class="color"></label>
+        <input id="black" type="radio" value="black" name="color" checked />
+        <label for="black" class="color"></label>
 
+      </div>
+      <button type="button" onClick="undo()">Undo</button>
+      <canvas class="draw-canvas"></canvas>
+      <button type="button" onclick="onSubmitDrawing()">Done</button>
     </div>
-    <button type="button" onClick="undo()">Undo</button>
-    <canvas class="draw-canvas"></canvas>
-    <button type="button" onclick="onSubmitDrawing()">Done</button>
   </div>
 
   <div id="will-guess-screen" class="screen">
-    <h1>Time to Guess</h1>
-    <p>Pass phone to player to your left.</p>
-    <button type="button" onclick="initGuessScreen()">Ready to Guess</button>
+    <div class="container">
+      <h1>Time to Guess</h1>
+      <p>Pass phone to player to your left.</p>
+      <button type="button" onclick="initGuessScreen()">Ready to Guess</button>
+    </div>
   </div>
 
   <div id="guess-screen" class="screen">
-    <h1>Guess</h1>
-    <canvas></canvas>
-    <label for="guess">Your Guess</label>
-    <input type="text" name="guess" id="guess">
-    <button type="button" onclick="onGuess()">Done</button>
+    <div class="container">
+      <h1>Guess</h1>
+      <canvas></canvas>
+      <label for="guess">Your Guess</label>
+      <input type="text" name="guess" id="guess">
+      <button type="button" onclick="onGuess()">Done</button>
+    </div>
   </div>
 
   <div id="result-screen" class="screen">
-    <h1>Results</h1>
-    <div id="results"></div>
-    <button type="button" onclick="initStartScreen()">Play Again</button>
+    <div class="container">
+      <h1>Results</h1>
+      <div id="results"></div>
+      <button type="button" onclick="initStartScreen()">Play Again</button>
+    </div>
   </div>
   <script>onLoad();</script>
 </body>

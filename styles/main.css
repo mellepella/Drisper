@@ -15,22 +15,36 @@ body {
   color: white;
   background: var(--slate-700);
   font-family: verdana;
+  overflow-x: hidden;
 }
 
 .screen {
-  display: none;
-  max-width: 50vh;
-  width: 100%;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(100%);
   height: 100vh;
 }
 
-.current-screen {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+.screen:not(.next-screen) {
+  transition: all 200ms ease-out;
+}
+
+.container {
+  max-width: 50vh;
+  width: 100%;
   height: 100vh;
+  margin: auto;
+}
+
+.current-screen {
+  transform: translateX(0%);
+  transition: all 200ms ease-out;
+}
+
+.next-screen {
+  transform: translateX(-50%);
 }
 
 canvas {
