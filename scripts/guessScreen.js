@@ -32,8 +32,7 @@ function onGuess() {
     guess: input.value,
   });
 
-  const currentRound = State.rounds.length;
-  if (currentRound >= State.numberOfPlayers) {
+  if (State.lastRoundPlayed()) {
     initResultsScreen();
   } else {
     initWillDrawScreen();

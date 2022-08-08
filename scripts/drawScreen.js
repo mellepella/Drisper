@@ -132,8 +132,7 @@ function onSubmitDrawing() {
   State.addRound({ type: "draw", canvas: cloneCanvas(canvas) });
   detach();
 
-  const currentRound = State.rounds.length;
-  if (currentRound >= State.numberOfPlayers) {
+  if (State.lastRoundPlayed()) {
     initResultsScreen();
   } else {
     initWillGuessScreen();
